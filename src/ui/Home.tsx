@@ -16,7 +16,13 @@ function Home() {
         </span>
       </h1>
 
-      {username === '' ? <CreateUser /> : <Button to="/menu" type="primary">Order now</Button>}
+      {username === '' ? (
+        <CreateUser />
+      ) : (
+        <Button to="/menu" type="primary">
+          Continue Ordering, {username}
+        </Button>
+      )}
     </div>
   );
 }

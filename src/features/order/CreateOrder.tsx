@@ -3,6 +3,7 @@
 import { Form, redirect, useNavigation, useActionData } from 'react-router-dom';
 import { createOrder } from '../../services/apiRestaurant';
 import Button from '../../ui/Button';
+import { useSelector } from 'react-redux';
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str: any) =>
@@ -37,6 +38,7 @@ const fakeCart = [
 function CreateOrder() {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
+  const username = useSelector((state: any) => state.user.username);
 
   const formErrors = useActionData();
 
@@ -51,21 +53,36 @@ function CreateOrder() {
       <Form method="POST">
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
           <label className="sm:basis-40">First Name</label>
-          <input type="text" name="customer" required className="input grow" />
+          <input
+            type="text"
+            name="customer"
+            defaultValue={username}
+            required
+            className="input grow"
+          />
         </div>
 
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
           <label className="sm:basis-40">Phone number</label>
           <div className="grow">
             <input type="tel" name="phone" required className="input w-full" />
-            {formErrors?.phone && <p className="mt-2 text-xs text-red-500 bg-red-100 p-1 rounded-md w-fit">{(formErrors as any)?.phone}</p>}
+            {formErrors?.phone && (
+              <p className="mt-2 w-fit rounded-md bg-red-100 p-1 text-xs text-red-500">
+                {(formErrors as any)?.phone}
+              </p>
+            )}
           </div>
         </div>
 
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
           <label className="sm:basis-40">Address</label>
           <div className="grow">
-            <input type="text" name="address" required className="input w-full" />
+            <input
+              type="text"
+              name="address"
+              required
+              className="input w-full"
+            />
           </div>
         </div>
 
@@ -78,11 +95,12 @@ function CreateOrder() {
             // value={withPriority}
             // onChange={(e) => setWithPriority(e.target.checked)}
           />
-          <label className="font-medium" htmlFor="priority">Want to yo give your order priority?</label>
+          <label className="font-medium" htmlFor="priority">
+            Want to yo give your order priority?
+          </label>
         </div>
 
-
-        <div >
+        <div>
           <input type="hidden" name="cart" value={JSON.stringify(cart)}></input>
           <Button isSubmitting={isSubmitting} type="primary">
             {isSubmitting ? 'Placing order' : 'Order Now'}

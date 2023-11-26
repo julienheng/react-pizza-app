@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 function CreateUser() {
   const [username, setUsername] = useState('');
-
+  
   // call dispatch as function from redux
   const dispatch = useDispatch();
   const navigate = useNavigate();
