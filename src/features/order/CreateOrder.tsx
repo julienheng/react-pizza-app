@@ -58,7 +58,7 @@ function CreateOrder() {
           <label className="sm:basis-40">Phone number</label>
           <div className="grow">
             <input type="tel" name="phone" required className="input w-full" />
-            {formErrors?.phone && <p>{(formErrors as any)?.phone}</p>}
+            {formErrors?.phone && <p className="mt-2 text-xs text-red-500 bg-red-100 p-1 rounded-md w-fit">{(formErrors as any)?.phone}</p>}
           </div>
         </div>
 
@@ -69,7 +69,7 @@ function CreateOrder() {
           </div>
         </div>
 
-        <div>
+        <div className="mb-12 flex items-center gap-5">
           <input
             type="checkbox"
             name="priority"
@@ -78,9 +78,11 @@ function CreateOrder() {
             // value={withPriority}
             // onChange={(e) => setWithPriority(e.target.checked)}
           />
-          <label htmlFor="priority">Want to yo give your order priority?</label>
+          <label className="font-medium" htmlFor="priority">Want to yo give your order priority?</label>
         </div>
-        <div>
+
+
+        <div >
           <input type="hidden" name="cart" value={JSON.stringify(cart)}></input>
           <Button isSubmitting={isSubmitting} type="primary">
             {isSubmitting ? 'Placing order' : 'Order Now'}
