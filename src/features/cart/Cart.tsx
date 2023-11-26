@@ -11,7 +11,7 @@ function Cart() {
   const cart = useSelector(getCart);
   const dispatch = useDispatch();
 
-  if(!cart.length) return <EmptyCart />
+  if (!cart.length) return <EmptyCart />;
 
   return (
     <div className="px-4 py-3">
@@ -21,7 +21,7 @@ function Cart() {
 
       <ul className="mt-3 divide-y divide-stone-200 border-b">
         {cart.map((item: any) => (
-          <CartItem key={item.pizzaId} item={item} />
+          <CartItem key={item.id} item={item} />
         ))}
       </ul>
       <div className="mt-6 space-x-2">

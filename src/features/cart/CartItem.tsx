@@ -1,5 +1,5 @@
 import { formatCurrency } from '../../utils/helpers';
-import Button from '../../ui/Button';
+import DeleteItem from './DeleteItem';
 
 type Props = {
   item: {
@@ -11,7 +11,7 @@ type Props = {
 };
 
 function CartItem({ item }: Props) {
-  const { name, quantity, totalPrice } = item;
+  const { name, quantity, totalPrice, pizzaId } = item;
 
   return (
     <li className="py-3 sm:flex sm:items-center sm:justify-between">
@@ -20,7 +20,7 @@ function CartItem({ item }: Props) {
       </p>
       <div className="flex items-center justify-between sm:gap-6">
         <p className="text-sm font-bold">{formatCurrency(totalPrice)}</p>
-        <Button type="small">Delete</Button>
+        <DeleteItem pizzaId={pizzaId} />
       </div>
     </li>
   );
