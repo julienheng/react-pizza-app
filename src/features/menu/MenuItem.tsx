@@ -1,5 +1,7 @@
 import Button from '../../ui/Button';
 import { formatCurrency } from '../../utils/helpers';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../cart/cartSlice';
 
 type Props = {
   pizza: {
@@ -14,8 +16,17 @@ type Props = {
 function MenuItem({ pizza }: Props) {
   const { name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
 
+  const dispatch = useDispatch();
+
   const handleAddToCart = () => {
-    console.log('Add to cart');
+    const newItem = {
+      pizzaId: 12,
+      name,
+      quantity: 1,
+      unitPrice,
+      totalPrice: unitPrice * 1,
+    };
+    dispatch(addItem(newItem))
   };
 
   return (
@@ -39,7 +50,11 @@ function MenuItem({ pizza }: Props) {
             </p>
           )}
 
-          {!soldOut && <Button type="small" onClick={handleAddToCart}>Add to cart</Button>}
+          {!soldOut && (
+            <Button type="small" onClick={handleAddToCart}>
+              Add to cart
+            </Button>
+          )}
         </div>
       </div>
     </li>
