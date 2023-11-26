@@ -22,10 +22,12 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 
+// Define the initial state using that type
 const initialState = {
   username: '',
 };
 
+// Define a slice of state and the reducers
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -36,7 +38,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { updateName } = userSlice.actions;
+export const { updateName } = userSlice.actions; // export the action/function to component for updating the state
 
-
-export default userSlice.reducer;
+export default userSlice.reducer; // export the reducer to store.ts
