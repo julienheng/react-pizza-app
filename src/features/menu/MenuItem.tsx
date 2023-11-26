@@ -5,6 +5,7 @@ import { addItem } from '../cart/cartSlice';
 
 type Props = {
   pizza: {
+    id: number;
     name: string;
     unitPrice: number;
     ingredients: string[];
@@ -14,19 +15,19 @@ type Props = {
 };
 
 function MenuItem({ pizza }: Props) {
-  const { name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
+  const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
 
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
     const newItem = {
-      pizzaId: 12,
+      pizzaId: id,
       name,
       quantity: 1,
       unitPrice,
       totalPrice: unitPrice * 1,
     };
-    dispatch(addItem(newItem))
+    dispatch(addItem(newItem));
   };
 
   return (
