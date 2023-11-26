@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import LinkButton from '../../ui/LinkButton';
 import Button from '../../ui/Button';
+import EmptyCart from './EmptyCart';
 import CartItem from './CartItem';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCart, clearCart } from './cartSlice';
@@ -9,6 +10,8 @@ function Cart() {
   const username = useSelector((state: any) => state.user.username);
   const cart = useSelector(getCart);
   const dispatch = useDispatch();
+
+  if(!cart.length) return <EmptyCart />
 
   return (
     <div className="px-4 py-3">
