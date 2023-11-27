@@ -12,7 +12,7 @@ export default function AppLayout() {
 
       <Header />
 
-      <div className="overflow-scroll flex items-center">
+      <div className="overflow-scroll">
         <main className="mx-auto max-w-3xl">
           {' '}
           {/* overflow-scroll makes the specific content scroll when the screen is small */}
