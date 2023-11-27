@@ -17,10 +17,14 @@ const isValidPhone = (str: any) =>
     str,
   );
 
-  interface FormErrors {
-    [key: string]: string;
-    phone: string;
-  }
+interface FormErrors {
+  [key: string]: string;
+  phone: string;
+}
+
+interface Error {
+  phone: string;
+}
 
 function CreateOrder() {
   const [withPriority, setWithPriority] = useState(false);
@@ -154,9 +158,7 @@ export async function action({ request }: any) {
   };
   console.log(order);
 
-  const errors = {
-    phone: '',
-  };
+  const errors: Error = {} as any;
   if (!isValidPhone(order.phone)) {
     errors.phone = 'Please provide correct phone number';
   }
