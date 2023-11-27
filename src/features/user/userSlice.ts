@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getAddress } from '../../services/apiGeocoding';
 
@@ -10,7 +11,7 @@ function getPosition() {
 // THUNK
 export const fetchAddress = createAsyncThunk('user/fetchAddress', async () => {
   // 1) We get the user's geolocation position
-  const positionObj = await getPosition();
+  const positionObj: any = await getPosition();
   const position = {
     latitude: positionObj.coords.latitude,
     longitude: positionObj.coords.longitude,

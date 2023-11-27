@@ -1,22 +1,27 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-refresh/only-export-components */
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useFetcher } from 'react-router-dom';
 import { getOrder } from '../../services/apiRestaurant';
-// import { order } from "../../utils/orderData";
 import OrderItem from './OrderItem';
 import {
   calcMinutesLeft,
   formatCurrency,
   formatDate,
 } from '../../utils/helpers';
+import { useEffect } from 'react';
 
-type Props = {
-  withPriority: boolean;
-};
-
-function Order({ withPriority }: Props) {
+function Order() {
   const order = useLoaderData();
-  // Everyone can search for all orders, so for privacy reasons we're gonna gonna exclude names or address, these are only for the restaurant staff
+
+  const fetcher = useFetcher();
+
+  useEffect(
+    function () {
+      if (!fetcher.data && fetcher.state === 'idle') fetcher.load('/menu');
+    },
+    [fetcher],
+  );
+
   const {
     id,
     status,
@@ -59,7 +64,15 @@ function Order({ withPriority }: Props) {
 
       <ul className="dive-stone-200 divide-y border-b border-t">
         {cart.map((item: any) => (
-          <OrderItem item={item} key={item.pizzaId} />
+          <OrderItem
+            item={item}
+            key={item.pizzaId}
+            isLoadingIngredients={fetcher.state === 'loading'}
+            ingredients={
+              fetcher?.data?.find((element: any) => element.id === item.pizzaId)
+                .ingredients ?? []
+            }
+          />
         ))}
       </ul>
 
