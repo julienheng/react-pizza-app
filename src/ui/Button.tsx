@@ -6,7 +6,7 @@ type Props = {
   disabled?: boolean;
   to?: string;
   type: string;
-  onClick?: (e: React.FormEvent<HTMLInputElement>) => void;
+  onClick?: (() => void) | ((e: React.FormEvent<HTMLInputElement>) => void);
 };
 
 export default function Button({
@@ -36,7 +36,11 @@ export default function Button({
 
   if (onClick)
     return (
-      <button disabled={disabled} className={styles[type]} onClick={onClick}>
+      <button
+        disabled={disabled}
+        className={styles[type]}
+        onClick={onClick as () => void}
+      >
         {children}
       </button>
     );

@@ -17,6 +17,11 @@ const isValidPhone = (str: any) =>
     str,
   );
 
+  interface FormErrors {
+    [key: string]: string;
+    phone: string;
+  }
+
 function CreateOrder() {
   const [withPriority, setWithPriority] = useState(false);
   const navigation = useNavigation();
@@ -31,7 +36,7 @@ function CreateOrder() {
 
   const isLoadingAddress = addressStatus === 'loading';
 
-  const formErrors = useActionData();
+  const formErrors: FormErrors = useActionData() as any;
 
   const cart = useSelector(getCart);
   const dispatch = useDispatch();
@@ -93,7 +98,7 @@ function CreateOrder() {
                 disabled={isLoadingAddress}
                 onClick={(e) => {
                   e.preventDefault();
-                  dispatch(fetchAddress());
+                  dispatch(fetchAddress() as any);
                 }}
               >
                 Get Position
@@ -127,10 +132,7 @@ function CreateOrder() {
                 : ''
             }
           />
-          <Button
-            disabled={isSubmitting || isLoadingAddress}
-            type="primary"
-          >
+          <Button disabled={isSubmitting || isLoadingAddress} type="primary">
             {isSubmitting
               ? 'Placing order'
               : `Order now from ${formatCurrency(totalPrice)}`}
