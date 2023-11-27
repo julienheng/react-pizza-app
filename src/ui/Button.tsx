@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from 'react-router-dom';
 
 type Props = {
@@ -18,7 +19,7 @@ export default function Button({
   const base =
     'inline-block text-sm rounded-full bg-yellow-500 font-semibold uppercase tracking-wide text-stone-800 transition-colors duration-200 hover:bg-yellow-300 focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-2 disabled:cursor-not-allowed';
 
-  const styles = {
+  const styles: { [key: string]: string } = {
     primary: base + 'px-4 py-3 sm:px-6 sm:py-4',
     small: base + 'py-3 md:px-5 md:py-2.5 px-4 text-xs',
     secondary:
