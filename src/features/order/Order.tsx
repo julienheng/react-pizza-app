@@ -10,11 +10,14 @@ import {
   formatDate,
 } from '../../utils/helpers';
 
-function Order() {
+type Props = {
+  withPriority: boolean;
+}
+
+function Order({ withPriority }: Props) {
   const order = useLoaderData();
   // Everyone can search for all orders, so for privacy reasons we're gonna gonna exclude names or address, these are only for the restaurant staff
   const {
-    id,
     status,
     priority,
     priorityPrice,
@@ -53,13 +56,14 @@ function Order() {
         </p>
       </div>
 
-
       <ul className="dive-stone-200 divide-y border-b border-t">
-        {cart.map((item: any) => (<OrderItem item={item} key={item.id} />))}
+        {cart.map((item: any) => (
+          <OrderItem item={item} key={item.pizzaId} />
+        ))}
       </ul>
 
       <div className="space-y-2 bg-stone-200 px-6 py-5">
-        <p className="text-sm font-medium text-stone-600">
+        <p className="text-sm font-medium text-stone-600 ">
           Price pizza: {formatCurrency(orderPrice)}
         </p>
         {priority && (
