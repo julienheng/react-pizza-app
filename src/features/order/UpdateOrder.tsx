@@ -1,13 +1,11 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useFetcher } from 'react-router-dom';
 import Button from '../../ui/Button';
 import { updateOrder } from '../../services/apiRestaurant';
 
-type Props = {
-  order: any;
-};
 
-function UpdateOrder({ order }: Props) {
+function UpdateOrder() {
   const fetcher = useFetcher();
 
   return (
@@ -17,10 +15,12 @@ function UpdateOrder({ order }: Props) {
   );
 }
 
-export default UpdateOrder;
-
-export async function action({ request, params }) {
+export async function action({ params }: any) {
   const data = { priority: true };
   await updateOrder(params.orderId, data);
-  return null;
+  
+  return null
 }
+
+export default UpdateOrder;
+
