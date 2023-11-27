@@ -1,4 +1,4 @@
-import ButtonType from '../../ui/ButtonType';
+import Button from '../../ui/Button';
 import { formatCurrency } from '../../utils/helpers';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, getCurrentQuantityById } from '../cart/cartSlice';
@@ -67,9 +67,9 @@ function MenuItem({ pizza }: Props) {
           )}
 
           {!soldOut && !isInCart && (
-            <ButtonType type="small" onClick={handleAddToCart}>
+            <Button type="small" onClick={handleAddToCart}>
               Add to cart
-            </ButtonType>
+            </Button>
           )}
         </div>
       </div>

@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 type Props = {
   children: React.ReactNode;
-  isSubmitting: boolean;
-  to: string;
+  isSubmitting?: boolean;
+  to?: string;
   type: string;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 export default function Button({
