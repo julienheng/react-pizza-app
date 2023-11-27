@@ -108,7 +108,7 @@ function CreateOrder() {
             name="priority"
             id="priority"
             className="h-6 w-6 accent-yellow-400 focus:outline-none focus:ring focus:ring-yellow-400 focus:ring-offset-2"
-            value={withPriority}
+            value={withPriority ? 'true' : 'false'}
             onChange={(e) => setWithPriority(e.target.checked)}
           />
           <label className="font-medium" htmlFor="priority">
@@ -128,15 +128,13 @@ function CreateOrder() {
             }
           />
           <Button
-            isSubmitting={isSubmitting || isLoadingAddress}
+            disabled={isSubmitting || isLoadingAddress}
             type="primary"
           >
             {isSubmitting
               ? 'Placing order'
               : `Order now from ${formatCurrency(totalPrice)}`}
           </Button>
-
-          {/* </button> */}
         </div>
       </Form>
     </div>
@@ -150,11 +148,13 @@ export async function action({ request }: any) {
     ...data,
     cart: JSON.parse(data.cart),
     priority: data.priority === 'true',
-    // phone: data.phone,
+    phone: data.phone,
   };
   console.log(order);
 
-  const errors = {};
+  const errors = {
+    phone: '',
+  };
   if (!isValidPhone(order.phone)) {
     errors.phone = 'Please provide correct phone number';
   }

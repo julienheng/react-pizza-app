@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 
 type Props = {
   children: React.ReactNode;
-  isSubmitting?: boolean;
+  disabled?: boolean;
   to?: string;
   type: string;
-  onClick?: () => void;
+  onClick?: (e: React.FormEvent<HTMLInputElement>) => void;
 };
 
 export default function Button({
   children,
-  isSubmitting,
+  disabled,
   to,
   type,
   onClick,
@@ -34,20 +34,15 @@ export default function Button({
       </Link>
     );
 
-
   if (onClick)
     return (
-      <button
-        disabled={isSubmitting}
-        className={styles[type]}
-        onClick={onClick}
-      >
+      <button disabled={disabled} className={styles[type]} onClick={onClick}>
         {children}
       </button>
     );
 
   return (
-    <button disabled={isSubmitting} className={styles[type]}>
+    <button disabled={disabled} className={styles[type]}>
       {children}
     </button>
   );
