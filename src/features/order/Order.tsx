@@ -12,12 +12,13 @@ import {
 
 type Props = {
   withPriority: boolean;
-}
+};
 
 function Order({ withPriority }: Props) {
   const order = useLoaderData();
   // Everyone can search for all orders, so for privacy reasons we're gonna gonna exclude names or address, these are only for the restaurant staff
   const {
+    id,
     status,
     priority,
     priorityPrice,
@@ -31,7 +32,7 @@ function Order({ withPriority }: Props) {
   return (
     <div className="space-y-8 px-4 py-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h2 className="text-xl font-semibold">Status</h2>
+        <h2 className="text-xl font-semibold">Order #{id} status</h2>
 
         <div className="space-x-2">
           {priority && (

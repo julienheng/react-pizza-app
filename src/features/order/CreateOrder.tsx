@@ -17,17 +17,16 @@ const isValidPhone = (str: any) =>
   );
 
 function CreateOrder() {
+  const [withPriority, setWithPriority] = useState(false);
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
   const username = useSelector((state: any) => state.user.username);
 
   const formErrors = useActionData();
 
-  const [withPriority, setWithPriority] = useState(false);
-
   const cart = useSelector(getCart);
   const totalCartPrice = useSelector(getTotalCartPrice);
-  const priorityPrice = 0;
+  const priorityPrice = withPriority ? totalCartPrice * 0.2 : 0;
   const totalPrice = totalCartPrice + priorityPrice;
   if (!cart.length) return <EmptyCart />;
 
@@ -81,7 +80,7 @@ function CreateOrder() {
             onChange={(e) => setWithPriority(e.target.checked)}
           />
           <label className="font-medium" htmlFor="priority">
-            Want to yo give your order priority?
+            Want to give your order priority?
           </label>
         </div>
 
