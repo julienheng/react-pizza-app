@@ -1,21 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { Link } from 'react-router-dom';
-
 type Props = {
   children: React.ReactNode;
-  isSubmitting: boolean;
-  to: string;
+  onClick?: () => void;
   type: string;
-  onClick: () => void;
 };
 
-export default function Button({
-  children,
-  isSubmitting,
-  to,
-  type,
-  onClick,
-}: Props) {
+export default function ButtonType({ type, children, onClick }: Props) {
   const base =
     'inline-block text-sm rounded-full bg-yellow-500 font-semibold uppercase tracking-wide text-stone-800 transition-colors duration-200 hover:bg-yellow-300 focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-2 disabled:cursor-not-allowed';
 
@@ -27,28 +16,12 @@ export default function Button({
     round: base + 'px-2.5 py-1 md:px-3.5 md:py-2 text-sm',
   };
 
-  if (to)
-    return (
-      <Link to={to} className={styles[type]}>
-        {children}
-      </Link>
-    );
-
-
   if (onClick)
     return (
-      <button
-        disabled={isSubmitting}
-        className={styles[type]}
-        onClick={onClick}
-      >
+      <button className={styles[type]} onClick={onClick}>
         {children}
       </button>
     );
 
-  return (
-    <button disabled={isSubmitting} className={styles[type]}>
-      {children}
-    </button>
-  );
+  return <button className={styles[type]}>{children}</button>;
 }
